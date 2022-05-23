@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.inadang.mapper.MenuMapper">
+  	<insert id="insert">
+  		<selectKey keyProperty="mno" order="BEFORE" resultType="long">
+  			SELECT SEQ_MENU.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO TBL_MENU (SNO, MNO, NAME, PRICE, INFO)
+  		VALUES (#{sno}, #{mno}, #{name}, #{price}, #{info})
+  	</insert>
+  	
+  	<delete id="delete">
+  		DELETE TBL_MENU WHERE MNO = #{mno}
+  	</delete>
+  	
+  	<insert id="insertAttach">
+  		INSERT INTO TBL_MENU_ATTACH (MNO, ANO, UUID, ORIGIN)
+  		VALUES (#{mno}, SEQ_ATTACH.NEXTVAL, #{uuid}, #{origin})
+  	</insert>
+  	
+  	<select id="selectAttach" resultType="menuAttach">
+  		SELECT * FROM TBL_MENU_ATTACH WHERE MNO = #{mno}
+  	</select>
+  	
+  	<delete id="deleteAttach">
+  		DELETE TBL_MENU_ATTACH WHERE MNO = #{mno}
+  	</delete>
+  	
+  	<update id="update">
+  		UPDATE TBL_MENU SET
+  		NAME = #{name}, 
+  		PRICE = #{price}, 
+  		INFO = #{info}
+  		WHERE MNO = #{mno}
+  	</update>
+  	
+  	<select id="selectAll" resultType="menu">
+  		SELECT * FROM TBL_MENU WHERE SNO = #{sno} AND STATE = 1
+  		AND MNO > #{cri.lastNo}
+		AND ROWNUM &lt;= #{cri.amount}
+  	</select>
+  	
+  	<select id="select" resultType="menu">
+  		SELECT * FROM TBL_MENU WHERE MNO = #{mno}
+  	</select>
+  	
+  	<update id="updateState">
+  		UPDATE TBL_MENU SET
+	    STATE = 
+	        CASE
+	            WHEN STATE = '1' THEN '0'
+	            WHEN STATE = '0' THEN '1'
+	        END
+		WHERE MNO = #{mno}
+  	</update>
+  	
+  	<delete id="deleteAll">
+  		DELETE TBL_MENU WHERE SNO = #{sno}
+  	</delete>
+  
+  	<delete id="deleteAttachByUuid">
+  		DELETE TBL_MENU_ATTACH WHERE UUID = #{uuid}
+  	</delete>
+  </mapper>

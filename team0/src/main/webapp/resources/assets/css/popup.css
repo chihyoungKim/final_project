@@ -1,0 +1,296 @@
+/* 메뉴 수정 팝업 */
+.menu-modify-pop-up {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 540px;
+    height: 80vh;
+    background: #fff;
+    box-sizing: border-box;
+    border: 1px solid #DBDBDB;
+    border-radius: 8px;
+}
+.menu-modify-pop-up .mgt32 {
+    margin-top: 20px;
+}
+.menu-modify-pop-up .mgt20 {
+    margin-top: 20px;
+}
+.menu-modify-pop-up .mgt12 {
+    margin-top: 20px;
+}
+
+.opt-register-pop-up .mgt12 {
+    margin-top: 5px;
+}
+
+.menu-modify-pop-up .mgb20 {
+    margin-bottom: 20px;
+}
+.menu-modify-pop-up .flex {
+    display: flex;
+}
+.menu-modify-pop-up .jcsb {
+    justify-content: space-between;
+}
+.menu-modify-pop-up .aic {
+    align-items: center;
+}
+.menu-modify-pop-up .title-text {
+    font-size: 28px;
+    color: #000;
+    font-weight: bold;
+}
+.menu-modify-pop-up .title-text-2 {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+.menu-modify-pop-up .title-text-3 {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+.menu-modify-pop-up .title-text-3 > span {
+    font-size: 14px;
+    color: #777;
+}
+.menu-modify-pop-up .divide-line {
+    width: 100%;
+    height: 1px;
+    background: #DBDBDB;
+}
+.menu-modify-pop-up .input-type-1 {
+    width: 100%;
+    height: 56px;
+}
+.menu-modify-pop-up .input-type-1 input {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 1px solid #B0B0B0;
+    box-sizing: border-box;
+    padding: 0 16px;
+    color: #333;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.menu-modify-pop-up .space-area-opt {
+
+}
+
+
+.menu-modify-pop-up .input-type-1 input::placeholder {
+    color: #777;
+}
+.menu-modify-pop-up .space-area {
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+.menu-modify-pop-up .textarea-box {
+    width: 100%;
+    height: 160px;
+    position: relative;
+}
+.menu-modify-pop-up .textarea-box textarea {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #B0B0B0;
+    border-radius: 8px;
+    color: #333;
+    box-sizing: border-box;
+    display: block;
+    padding: 16px;
+    font-size: 18px;
+}
+.menu-modify-pop-up .textarea-box textarea::placeholder {
+    color: #777;
+}
+.menu-modify-pop-up .textarea-box .text-number {
+    position: absolute;
+    font-size: 16px;
+    color: #999;
+    right: 16px;
+    bottom: 16px;
+}
+.menu-modify-pop-up .btn-type-1 {
+    box-sizing: border-box;
+    padding: 8px 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    display: inline-block;
+    cursor: pointer;
+}
+.menu-modify-pop-up .btn-type-2 {
+    box-sizing: border-box;
+    width: 50%;
+    height: 52px;
+    text-align: center;
+    line-height: 52px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #fff;
+    font-size: 18px;
+}
+.menu-modify-pop-up .top-area {
+    width: 100%;
+    height: 80px;
+    position: relative;
+    box-sizing: border-box;
+    padding: 0 20px;
+    border-bottom: 1px solid #B0B0B0;
+}
+.menu-modify-pop-up .top-area .title-text {
+    text-align: center;
+    line-height: 80px;
+}
+.menu-modify-pop-up .top-area .exit-btn {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #777777;
+    cursor: pointer;
+}
+.menu-modify-pop-up .progress-box {
+    width: 100%;
+    height: 3px;
+    position: relative;
+}
+.menu-modify-pop-up .progress-box >div {
+    width: 25%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #FFA349;
+}
+.menu-modify-pop-up .content-area {
+    height: calc(100% - 175px);
+    overflow-y: auto;
+}
+.menu-modify-pop-up .content-area .content-area-in {
+    height: 100%;
+}
+.menu-modify-pop-up .space-area-2 .input-type-1 {
+    width: 200px;
+}
+.menu-modify-pop-up .space-area-2 .input-box-3 {
+    margin-left: 8px;
+    position: relative;
+}
+.menu-modify-pop-up .space-area-2 .input-box-3 input {
+    padding: 0 33px 0 16px;
+    text-align: right;
+}
+.menu-modify-pop-up .space-area-2 .input-box-3 .fix-text {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #777;
+}
+.menu-modify-pop-up .space-area-3 > .flex {
+    align-items: flex-end;
+}
+.menu-modify-pop-up .space-area-3 .ico-box  {
+    cursor: pointer;
+    margin-left: 4px;
+}
+.menu-modify-pop-up .space-area-4 .file-upload-area {
+    align-items: flex-end;
+}
+.menu-modify-pop-up .space-area-4 .file-upload-box label {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+.menu-modify-pop-up .space-area-4 .file-upload-box input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+.menu-modify-pop-up .space-area-4 .img-infor-text {
+    font-size: 16px;
+    color: #777;
+    margin-left: 8px;
+}
+.menu-modify-pop-up .space-area-4 .add-btn {
+    background: #FFA349;
+    color: #fff;
+}
+.menu-modify-pop-up .space-area-5 .add-option-box {
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #B0B0B0;
+}
+.menu-modify-pop-up .space-area-5 .add-option-box .ico-box {
+    cursor: pointer;
+}
+.menu-modify-pop-up .space-area-5 .add-option-box .text-box {
+    margin-left: 16px;
+}
+.menu-modify-pop-up .space-area-5 .add-option-box .text-box .text-1 {
+    font-size: 18px;
+    color: #555;
+    font-weight: bold;
+}
+.menu-modify-pop-up .space-area-5 .add-option-box .text-box .text-2 {
+    font-size: 16px;
+    color: #555;
+    width: 290px;
+    height: 23px;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+}
+.menu-modify-pop-up .space-area-5 .add-option-box .cancle-btn {
+    border: 1px solid #E11414;
+    color: #E11414;
+}
+.menu-modify-pop-up .space-area-5 .add-option-btn {
+    font-size: 18px;
+    color: #3498DB;
+    margin-top: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.menu-modify-pop-up .bottom-btn-area {
+    box-sizing: border-box;
+    padding: 20px;
+}
+.menu-modify-pop-up .bottom-btn-area .add-btn {
+    border-radius: 4px 0 0 4px;
+    background: #FFA349;
+}
+.menu-modify-pop-up .bottom-btn-area .delete-btn {
+    border-radius: 0 4px 4px 0;
+    background: #E11414;
+}
+
+.menu-modify-pop-up .bottom-btn-area-register  {
+    /* bottom-btn-area register */
+    box-sizing: border-box;
+    padding: 15px;
+    border-radius: 4px 4px 4px 4px;
+    font-size: 18px;
+    color: white;
+    background-color: #FFA349;
+    margin: 16px 20px 12px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align:  center;
+    
+}

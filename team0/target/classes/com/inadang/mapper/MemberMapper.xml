@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.inadang.mapper.MemberMapper">
+  	<insert id="insertMember">
+		INSERT INTO TBL_MEMBER(ID, PASSWORD, NAME, TEL, EMAIL, NICKNAME) 
+		VALUES (#{id}, #{password}, #{name}, #{tel}, #{email}, #{nickName}) 
+  	</insert>
+  	<insert id="insertManager">
+		INSERT INTO TBL_MEMBER(ID, PASSWORD, NAME, TEL, EMAIL, BOSSNAME, BNO) 
+		VALUES (#{id}, #{password}, #{name}, #{tel}, #{email}, #{bossName}, #{bno}) 
+  	</insert>
+  	
+  	<insert id="insertAuth">
+  		INSERT INTO TBL_MEMBER_AUTH VALUES (#{id}, #{auth})
+  	</insert>
+  	
+  	<resultMap type="member" id="memberMap">
+  		<id property="id" column="id"/>
+  		<result property="id" column="id"/>
+  		<result property="password" column="password"/>
+  		<result property="name" column="name"/>
+  		<result property="tel" column="tel"/>
+  		<result property="email" column="email"/>
+  		<result property="nickName" column="nickName"/>
+  		<result property="regDate" column="regDate"/>
+  		<result property="bossName" column="bossName"/>
+  		<result property="sno" column="sno"/>
+  		<result property="bno" column="bno"/>
+  		<result property="enabled" column="enabled"/>
+  		<result property="emailAuth" column="emailAuth"/>
+		<result property="authToken" column="authToken"/>  		
+  		<collection property="auths" resultMap="authMap"/>
+  	</resultMap>
+  	
+  	<resultMap type="auth" id="authMap">
+  		<result property="id" column="id"/>
+  		<result property="auth" column="auth"/>
+  	</resultMap>
+  	
+  	
+  	<select id="get" resultMap="memberMap">
+  		SELECT * 
+		FROM TBL_MEMBER
+		JOIN TBL_MEMBER_AUTH
+		USING(ID)
+		WHERE ID = #{id}
+  	</select>
+  	
+  	<delete id="deleteAuth">
+  		DELETE TBL_MEMBER_AUTH WHERE ID = #{id}
+  	</delete>
+  	
+  	<delete id="deleteMember">
+  		DELETE TBL_MEMBER WHERE ID = #{id}
+  	</delete>
+  	
+  	<update id="updateMember">
+  		UPDATE TBL_MEMBER SET
+  			PASSWORD = #{password},
+		    NAME = #{name},
+		    TEL = #{tel},
+		    EMAIL = #{email},
+		    NICKNAME = #{nickName}
+		WHERE ID = #{id}
+  	</update>
+
+  	<update id="updateManager">
+  		UPDATE TBL_MEMBER SET
+  			PASSWORD = #{password},
+		    NAME = #{name},
+		    TEL = #{tel},
+		    EMAIL = #{email},
+		    BOSSNAME = #{bossName}
+		WHERE ID = #{id}
+  	</update>
+  	
+  	<update id="updateMemberAuth">
+  		UPDATE TBL_MEMBER_AUTH SET
+		    AUTH = #{auth}
+		WHERE ID = #{id}
+  	</update>
+  	
+  	<update id="updateSno">
+  		UPDATE TBL_MEMBER SET
+		    SNO = #{sno}
+		WHERE ID = #{id}
+  	</update>
+  	
+  	<select id="getSno" resultType="long">
+  		SELECT SNO FROM TBL_MEMBER WHERE ID = #{id}
+  	</select>
+  	
+  	<update id="updateEmailAuth">
+  		UPDATE TBL_MEMBER SET
+  		EMAILAUTH = #{emailAuth}
+  		WHERE ID = #{id}
+  	</update>
+  	
+  	<update id="updateEmailAuthToken">
+  		UPDATE TBL_MEMBER SET
+  			AUTHTOKEN = #{authToken}
+  		WHERE ID = #{id}
+  	</update>
+  	
+  	<update id="setSnoToNull">
+  		UPDATE TBL_MEMBER SET SNO = NULL WHERE SNO = #{sno}
+  	</update>
+  
+  </mapper>

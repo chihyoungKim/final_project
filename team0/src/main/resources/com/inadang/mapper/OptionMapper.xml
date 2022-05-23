@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.inadang.mapper.OptionMapper">
+ <!-- insert  -->
+  	<insert id="insert">
+  		 INSERT INTO TBL_OPT (OPTNO, NAME, PRICE, SNO, MNO, GNO) VALUES (SEQ_OPT.NEXTVAL, #{name}, #{price}, #{sno}, #{mno}, #{gno})
+  	</insert>
+	<insert id="insertGroup">
+	<selectKey keyProperty="gno" order="BEFORE" resultType="long"> SELECT SEQ_OPT_GROUP.NEXTVAL FROM DUAL </selectKey>
+	INSERT INTO TBL_OPT_GROUP (GNO, NAME, SNO, MNO) VALUES (#{gno}, #{name}, #{sno}, #{mno})
+	</insert>
+ 	
+ <!-- delete  -->	
+ 	<delete id="delete">
+ 		DELETE FROM tbl_opt WHERE gno = #{gno}
+ 	</delete>
+ 	<delete id="deleteGroup">
+ 		DELETE FROM tbl_opt_group WHERE gno = #{gno}
+ 	</delete>
+ 	
+ 	
+ 	
+ 	
+ </mapper>

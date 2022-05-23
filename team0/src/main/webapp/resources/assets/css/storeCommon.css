@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+/* 스타일시트 초기화 */
+*:focus{}
+*{margin:0;padding:0;list-style-type:none;box-sizing:border-box;border:0;outline:0;font-family:'Malgun Gothic','dotum','돋움','gulim','굴림','Tahoma';letter-spacing: -0.5px;}
+
+html{font-size:62.5%;-webkit-text-size-adjust:none;box-sizing:border-box;-webkit-font-smoothing:antialiased;scroll-behavior: smooth;background: #ffffff;}
+body{line-height: 1.4295;font-size:16px;color: #333;-webkit-text-size-adjust:none;box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary{display:block}
+blockquote, q{quotes:none}
+blockquote:before, blockquote:after,
+q:before, q:after{content:'';content:none}
+a{color:#222;text-decoration:none;background:transparent;cursor:pointer}
+mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}
+ins{color:#000;text-decoration:none}
+del{color:#aaa;text-decoration:line-through}
+abbr[title], dfn[title]{border-bottom:1px dotted #000;cursor:help}
+button{cursor:pointer}
+pre,code,kbd,samp,tt{*font-size:108%;line-height:100%}
+legend {position:absolute;margin:0;padding:0;font-size:0;line-height:0;text-indent:-9999em;overflow:hidden}
+select{font-size:14px;font-size:1.4rem;border:1px solid #ccc;border-radius:0px}
+label, input, button, select, img{vertical-align:middle}
+select {margin:0}
+em,address,cite{font-style:normal}
+input,select,textarea,button{border-radius:0;resize:none}
+p {margin:0;padding:0;word-break:break-all}
+i {font-style:normal}
+caption,
+hr{position:absolute;top:0;left:0;margin:0;padding:0;display:inline-block;line-height:0;font-size:0;border:0;overflow:hidden}
+pre{overflow-x:scroll;font-size:1.1em}
+select {-webkit-appearance: none;-moz-appearance: none;appearance: none;}
+*::placeholder{color:#ccc}
+*::selection{background:#000000;color:#fff;}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; -moz-appearance: none; appearance: none; } 
+input[type=number] { -moz-appearance: textfield; }
+input:read-only{background: #d7d7d7;}
+.skip{position: absolute;width: 1px;height: 1px;margin: -1px;overflow: hidden;padding: 0;border: 0;clip: rect(0,0,0,0)}

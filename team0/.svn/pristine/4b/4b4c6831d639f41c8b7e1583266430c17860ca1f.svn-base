@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.inadang.mapper.CartMapper">
+	<insert id="insertCart">
+  		INSERT INTO TBL_CART(CNO, MNO, COUNT, ID, PRICE, SNO, NAME)
+  		VALUES(SEQ_CART.NEXTVAL, #{mno}, #{count}, #{id}, #{count} * (SELECT PRICE FROM TBL_MENU WHERE MNO = #{mno}), (SELECT SNO FROM TBL_MENU WHERE MNO = #{mno}), (SELECT NAME FROM TBL_MENU WHERE MNO = #{mno}))
+  	</insert>
+  	
+  	<delete id="delete">
+  		DELETE TBL_CART WHERE CNO = #{cno} AND ID = #{id}
+  	</delete>
+  	
+  	<delete id="drop">
+  		DELETE TBL_CART WHERE ID = #{id}
+  	</delete>
+  	
+  	<select id="checkCart" resultType="Integer">
+  		SELECT COUNT(*) FROM TBL_CART WHERE MNO = #{mno} AND ID = #{id}
+  	</select>
+  	
+  	<select id="selectAllById" resultType="cart">
+		SELECT * FROM TBL_CART WHERE ID = #{id}
+	</select>
+	
+	<select id="read" resultType="cart">
+		SELECT * FROM TBL_CART WHERE CNO = #{cno}
+	</select>
+	
+	<select id="getLastCno" resultType="cart">
+		SELECT * FROM TBL_CART WHERE ID = #{id} AND ROWNUM &lt;=1 ORDER BY CNO DESC
+	</select>
+	
+	<update id="plusCart">
+  		UPDATE TBL_CART SET COUNT = (SELECT COUNT FROM TBL_CART WHERE CNO = #{cno}) + 1, PRICE = (SELECT PRICE FROM TBL_CART WHERE CNO = #{cno}) + (SELECT PRICE FROM TBL_MENU WHERE MNO = (SELECT MNO FROM TBL_CART WHERE CNO = #{cno})) WHERE CNO = #{cno}
+  	</update>
+
+	<update id="minusCart">
+  		UPDATE TBL_CART SET COUNT = (SELECT COUNT FROM TBL_CART WHERE CNO = #{cno}) - 1,, PRICE = (SELECT PRICE FROM TBL_CART WHERE CNO = #{cno}) - (SELECT PRICE FROM TBL_MENU WHERE MNO = (SELECT MNO FROM TBL_CART WHERE CNO = #{cno})) WHERE CNO = #{cno}
+  	</update>
+	
+  </mapper>

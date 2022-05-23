@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.inadang.mapper.OrderMenuMapper">
+  
+	<insert id="insertOld">
+		<selectKey keyProperty="omno" order="BEFORE" resultType="Long">
+			SELECT seq_ordermenu.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO tbl_orderMenu 
+		VALUES (#{ono}, #{count}, #{price}, #{omno}, #{mno})
+	</insert>
+	
+	<resultMap type="OrderMenu" id="om">
+		<result property="ono" column="ono"/>
+		<result property="count" column="count"/>
+		<result property="price" column="price"/>
+		<result property="omno" column="omno"/>
+		<result property="mno" column="mno"/>
+		<result property="id" column="id"/>
+	</resultMap>
+	
+	<insert id="insert">
+		<selectKey keyProperty="omno" order="BEFORE" resultType="Long">
+			SELECT seq_ordermenu.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO tbl_ordermenu (ono, count, price, omno, mno, id)
+		VALUES (#{ono},
+			 #{count},
+			 #{price},
+			 #{omno}, 
+			 #{mno},
+			 #{id}
+			 )
+	</insert>
+	
+  	<select id="getList" resultType="orderMenu">
+  		<![CDATA[
+  		SELECT * FROM tbl_ordermenu WHERE omno > 0
+  		]]>
+  	</select>
+  	
+  	<select id="findBy" resultType="orderMenu">
+  		SELECT N.ONO, M.NAME, M.PRICE, N.COUNT FROM TBL_MENU M JOIN TBL_ORDERMENU N USING(mno) WHERE ono = #{ono}
+  	</select>
+
+	<!-- <select id="get">
+		SELECT * FROM tbl_ordermenu WHERE ono = #{ono}
+	</select> -->
+
+	<delete id="delete">
+		DELETE tbl_ordermenu WHERE mno = #{mno}
+	</delete>	
+	
+	<delete id="deleteAll">
+		DELETE tbl_ordermenu  WHERE ono = #{ono}
+	</delete>	
+	
+  </mapper>

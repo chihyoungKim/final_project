@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.inadang.mapper.ReviewMapper">
+  	<select id="selectAll" resultType="review">
+  		SELECT /*+ INDEX(TBL_REVIEWS IDX_TBL_REVIEWS) */ * FROM TBL_REVIEWS WHERE SNO = #{sno}
+  		AND RNO &lt; #{cri.lastRno}
+        AND ROWNUM &lt;= #{cri.amount}
+  	</select>
+  	
+  	<select id="selectMine" resultType="review">
+  		SELECT * FROM TBL_REVIEWS WHERE ID = #{id}
+  	</select>
+  	
+  	<select id="select" resultType="review">
+  		SELECT * FROM TBL_REVIEWS WHERE RNO = #{rno}
+  	</select>
+  	
+  	<insert id="insert">
+  		<selectKey order="BEFORE" resultType="Long" keyProperty="rno">
+			SELECT SEQ_REVIEWS.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO TBL_REVIEWS (RNO, ID, SNO, CONTENT, SCOPE, GROUPID, ONO)
+  		VALUES (#{rno}, #{id}, #{sno}, #{content}, #{scope}, #{rno}, #{ono})
+  	</insert>
+  	
+  	<delete id="delete">
+  		DELETE TBL_REVIEWS WHERE RNO = #{rno}
+  	</delete>
+  	
+  	<insert id="insertAttach">
+  		INSERT INTO TBL_REVIEWS_ATTACH(RNO, ANO, UUID, ORIGIN, PATH)
+  		VALUES (#{rno}, SEQ_ATTACH.NEXTVAL, #{uuid}, #{origin}, #{path})
+  	</insert>
+  	
+  	<delete id="deleteAttach">
+  		DELETE TBL_REVIEWS_ATTACH WHERE RNO = #{rno}
+  	</delete>
+  	
+  	<select id="selectAttach" resultType="reviewAttach">
+  		SELECT * FROM TBL_REVIEWS_ATTACH WHERE RNO = #{rno}
+  	</select>
+  	
+  	<insert id="insertReply">
+  		INSERT INTO TBL_REVIEWS (RNO, ID, SNO, CONTENT, GROUPID)
+  		VALUES (SEQ_REVIEWS.NEXTVAL, #{id}, #{sno}, #{content}, #{groupId})
+  	</insert>
+  	
+  	<update id="updateReply">
+  		UPDATE TBL_REVIEWS SET
+  		CONTENT = #{content}
+  		WHERE RNO = #{rno}
+  	</update>
+  	
+  	<delete id="deleteAll">
+  		DELETE TBL_REVIEWS WHERE SNO = #{sno}
+  	</delete>
+  	
+  	<select id="existReview" resultType="boolean">
+  		SELECT CASE WHEN COUNT(*) >= 1 THEN 1 ELSE 0 END FROM TBL_REVIEWS WHERE ONO = #{ono}
+  	</select>
+  </mapper>

@@ -1,0 +1,30 @@
+
+
+
+
+/* 기본 노말라이징 */
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    color: inherit;
+}
+input:focus, select:focus, textarea:focus {
+    outline: none;
+}
+input, select, textarea {
+    font-family: "NotoSansKR-Regular";
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+textarea {
+    resize: none;
+}
+select::-ms-expand{
+    display:none;
+}
+input::-ms-clear { 
+    display: none;
+}

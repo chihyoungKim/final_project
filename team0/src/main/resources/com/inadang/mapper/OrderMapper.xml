@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.inadang.mapper.OrderMapper">
+  	<select id="getList" resultType="order">
+		SELECT * FROM tbl_order WHERE ono IS NOT NULL
+  	</select>
+
+  	<select id="showList" resultType="order">
+		SELECT 
+		ono
+		,id
+		,to_char(orderDate, 'yyyy-MM-dd hh24:mm:ss') orderDate
+		,amount
+		,status
+		FROM tbl_order WHERE sno = #{sno}
+  	</select>
+  	
+  	<select id="get" resultType="order">
+  		SELECT * FROM tbl_order WHERE ono = #{ono}
+  	</select>
+  	
+  	<insert id="insert">
+  		<selectKey order="BEFORE" resultType="string" keyProperty="ono">
+  		SELECT concat('ORD',(TO_CHAR(sysdate, 'yyymmddhh24mmss'))) FROM DUAL
+  		</selectKey>
+  		<![CDATA[
+			INSERT INTO tbl_order (ono, id, name, sno) VALUES (
+			    #{ono}, 
+			    #{id},    
+			    (
+			    SELECT DISTINCT S.name 
+			    FROM tbl_store S
+			    JOIN tbl_menu M
+			    USING (sno)
+			    WHERE sno = #{sno}
+			    ),
+			    #{sno}
+			)
+		]]>
+  	</insert>
+  	
+  	<delete id="delete">
+  		DELETE tbl_order WHERE ono = #{ono}
+  	</delete>
+  	
+  	<!-- 주문취소 -->
+  	<update id="cancel"> 
+  		UPDATE tbl_order set
+  		status = 'canceled'
+  		WHERE ono = #{ono} 
+  	</update>
+  	
+  	<!-- 주문완료 -->
+  	<update id="paid"> 
+  		UPDATE tbl_order set
+  		status = 'paid'
+  		WHERE ono = #{ono} 
+  	</update>
+  	
+  	<!-- 총가격 -->
+  	<update id="updateAmount">
+  	UPDATE tbl_order SET
+	AMOUNT = (
+	SELECT sum(price)
+	FROM tbl_orderMenu
+	where ono = #{ono}
+	)where ono = #{ono}
+  	</update>
+  	
+  </mapper>

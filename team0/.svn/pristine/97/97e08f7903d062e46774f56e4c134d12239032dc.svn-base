@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.inadang.mapper.PaymentMapper">
+  	<!-- 결제 내역 조회 (관리자버전) -->
+	<select id="getList" resultType="payment">
+		<![CDATA[
+			SELECT * FROM TBL_payment WHERE PNO > 0
+		]]>
+	</select>
+	
+	<!-- 주문번호 조회 -->
+	<select id="select" resultType="payment">
+		SELECT PNO,ONO,ID,AMOUNT,NAME,EMAIL,IMPUID,PAYMETHOD,APPLYNUM,QUOTA,STATUS
+		    ,to_char(TIMESTAMP, 'yyyy-mm-ss hh24:mm:ss') timestamp
+		    ,CANCLEDATE,PHONENUMBER,POSTCODE,ADDRESS,DETAILADDRESS,REQUESTS
+		FROM TBL_payment 
+		WHERE ONO = #{ono}
+	</select>
+	
+	<!-- 개인 특정 결제(주문)내역 조회 -->
+	<select id="findSpecific" resultType="payment">
+		SELECT PNO,ONO,ID,AMOUNT,NAME,EMAIL,IMPUID,PAYMETHOD,APPLYNUM,QUOTA,STATUS
+		    ,to_char(TIMESTAMP, 'yyyy-mm-ss hh24:mm:ss') timestamp
+		    ,CANCLEDATE,PHONENUMBER,POSTCODE,ADDRESS,DETAILADDRESS,REQUESTS 
+		FROM TBL_payment 
+		WHERE ONO = #{ono} AND ID = #{id}
+	</select>
+	
+	<!-- 개인 전체 결제(주문)내역 조회 -->
+	<select id="get" resultType="payment">
+		<![CDATA[
+			SELECT /*+ INDEX_ASC(TBL_payment IDX_payment)*/ 
+			PNO,ONO,ID,AMOUNT,NAME,EMAIL,IMPUID,PAYMETHOD,APPLYNUM,QUOTA,STATUS
+		    ,to_char(TIMESTAMP, 'yyyy-mm-ss hh24:mm:ss') timestamp
+		    ,CANCLEDATE,PHONENUMBER,POSTCODE,ADDRESS,DETAILADDRESS,REQUESTS
+			FROM TBL_payment 
+			WHERE ID = #{id}
+		]]>
+	</select>
+	
+<!-- 		<selectKey keyProperty="pno" order="BEFORE" resultType="Long">
+			SELECT seq_payment.nextval FROM DUAL
+		</selectKey> -->
+	<!-- 결제(주문)내역생성 -->
+	<insert id="insert">
+		INSERT INTO tbl_payment (pno, ono, id, amount, name, email, impUid, payMethod, applyNum, quota, status, phoneNumber, postCode, address, detailAddress, requests) 
+		VALUES (seq_payment.nextval, #{ono}, #{id}, #{amount}, #{name}, #{email}, #{impUid}, #{payMethod}, #{applyNum}, #{quota}, #{status}, #{phoneNumber}, #{postCode}, #{address}, #{detailAddress} ,#{requests})
+	</insert>
+	
+	<!-- 결제내역삭제(삭제) -->
+	<delete id="remove">
+		DELETE tbl_payment where pno = #{pno}
+	</delete>
+	
+	<!-- 결제 상태변경 -->
+	<update id="updateStatus">
+		UPDATE tbl_payment SET
+		status = #{status}
+		WHERE ono = #{ono}
+	</update>
+	 
+	<select id="getTotalCount" resultType="payment">
+		<![CDATA[
+		SELECT RN, timestamp, ono, name, amount FROM (
+			SELECT
+				/*+ INDEX_DESC(tbl_payment payment_pk) */
+				ROWNUM RN, timestamp, ono, name, amount
+				FROM tbl_payment
+				WHERE ROWNUM <= #{pageNum} * #{pageAmount}
+		) WHERE RN > (#{pageNum}-1) * #{pageAmount};
+		]]>
+	</select> 
+	 
+  </mapper>
